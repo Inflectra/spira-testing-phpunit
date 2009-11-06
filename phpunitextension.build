@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="PHPUnit Extension" default="rununittest">
+
+	<property name="phpunit.path" value="C:\Program Files\PHP\PHPUnit-3.4.2" />
+	<property name="phpunitextension.path" value="${project::get-base-directory()}" />
+
+	<target name="rununittest" description="Runs the sample PHPUnit Tests">
+		<echo message="Running the sample PHPUnit tests"/>
+		<exec program="phpunit.bat" verbose="true" basedir="${phpunit.path}" workingdir="${phpunitextension.path}" failonerror="false">
+			<arg value="Samples\SimpleTest.php" />
+		</exec>	
+	</target>
+	
+	<target name="zipup" description="Zips up the whole application for deployment">
+		<echo message="Zipping up entire application" />
+		<zip zipfile="RubyTestUnitRunner.zip" verbose="true" comment="Ruby Test::Unit Runner for SpiraTest">
+			<fileset>
+				<include name="*.rb" />
+				<include name="*.txt" />
+			</fileset>
+		</zip>
+	</target>
+	
+</project>
