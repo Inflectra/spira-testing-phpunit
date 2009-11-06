@@ -86,33 +86,5 @@ class SimpleTest extends PHPUnit_Framework_TestCase
 		//Successful test
 		$this->assertEquals(12, 12);
 	}
-
-	/**
-	 * Entry point for command line execution
-	 * 
-	 * @param args	The command line arguments
-	 */
-	/*public static void main (String[] args)
-	{
-		//Instantiate the JUnit core
-		JUnitCore core = new JUnitCore();
-
-		//Add the custom SpiraTest listener
-		core.addListener(new SpiraTestListener());
-
-		//Finally run the test fixture
-		core.run (SimpleTest.class);
-	}*/
-
-	/**
-	 * Entry point for JUnit 4.x runners
-	 * 
-	 * @return		Handle to the test framework
-	 */
-   /*
-	public static junit.framework.Test suite() 
-	{
-		return new JUnit4TestAdapter(SimpleTest.class);
-	}*/
 }
 ?>
