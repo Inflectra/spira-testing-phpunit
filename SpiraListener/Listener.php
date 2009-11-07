@@ -11,7 +11,15 @@
  
  class SpiraListener_Listener implements PHPUnit_Framework_TestListener
  {
-  define('DEFAULT_TEST_RUNNER_NAME', 'PHPUnit');
+  //General constants
+  const DEFAULT_TEST_RUNNER_NAME = "PHPUnit";
+  
+  //SpiraTest execution status constants
+  const EXECUTION_STATUS_ID_PASSED = 2;
+  const EXECUTION_STATUS_ID_FAILED = 1;
+  const EXECUTION_STATUS_ID_NOT_RUN = 3;
+  const EXECUTION_STATUS_ID_CAUTION = 6;
+  const EXECUTION_STATUS_ID_BLOCKED = 5;
   
     /**
      * An error occurred.
@@ -81,7 +89,8 @@
      */
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
-      //Do nothing since we log results in SpiraTest at the end of each test case individually
+      //Let the user know that we've finished the whole suite
+      printf ("\nTest Suite '%s' sent to SpiraTest\n", $suite->getName());
     }
 
     /**
@@ -102,7 +111,7 @@
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {
-      printf ("Test Case '", $test->getName(), "' finished\n");
+      printf ("\nTest Case '%s' (TC000X) sent to SpiraTest with status Y.\n", $test->getName());
     /*
         if (!$test instanceof PHPUnit_Framework_Warning) {
             if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_PASSED) {
