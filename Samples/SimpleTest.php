@@ -36,7 +36,7 @@ class SimpleTest extends PHPUnit_Framework_TestCase
 	 */
 	/*@Test
 	@SpiraTestCase(testCaseId=5)*/
-	public function testAdd()
+	public function testAdd__2()
 	{
 		$result = $this->fValue1 + $this->fValue2;
 
@@ -50,7 +50,7 @@ class SimpleTest extends PHPUnit_Framework_TestCase
    /*
 	@Test
 	@SpiraTestCase(testCaseId=5)*/
-	public function testDivideByZero()
+	public function testDivideByZero__3()
 	{
 		$zero = 0;
 		$result = 8 / $zero;
@@ -63,7 +63,7 @@ class SimpleTest extends PHPUnit_Framework_TestCase
    /*
 	@Test
 	@SpiraTestCase(testCaseId=6)*/
-	public function testEquals()
+	public function testEquals__4()
 	{
 		$this->assertEquals(12, 12);
 		$this->assertEquals(12.0, 12.0);
@@ -81,7 +81,7 @@ class SimpleTest extends PHPUnit_Framework_TestCase
    /*
 	@Test
 	@SpiraTestCase(testCaseId=6)*/
-	public function testSuccess()
+	public function testSuccess__5()
 	{
 		//Successful test
 		$this->assertEquals(12, 12);

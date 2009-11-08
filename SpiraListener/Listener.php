@@ -111,7 +111,45 @@
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {
-      printf ("\nTest Case '%s' (TC000X) sent to SpiraTest with status Y.\n", $test->getName());
+      //Get the full test name (includes the spira id appended)
+      $testNameAndId = $test->getName();
+      $testComponents = split("__", $testNameAndId);
+      if (count($testComponents >= 2))
+      {
+        //extract the test case id from the name (separated by two underscores)
+        $testName = $testComponents[0];
+        $testCaseId = (integer)$testComponents[1];
+        
+        //Now convert the execution status into the values expected by SpiraTest
+        $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_NOT_RUN;
+        
+        //If the test was in the warning situation, report as Blocked
+        if ($test instanceof PHPUnit_Framework_Warning)
+        {
+          $executionStatusId = EXECUTION_STATUS_ID_BLOCKED;
+        }
+        else
+        {
+           if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_SKIPPED)
+           {
+            $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_BLOCKED;
+           }
+           if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_INCOMPLETE)
+           {
+            $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_CAUTION;
+           }
+           if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_PASSED)
+           {
+              $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_PASSED;
+           }
+           if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_FAILURE || $test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_ERROR)
+           {
+              $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_FAILED;
+           }
+        }        
+        
+        printf ("\nTest Case '%s' (TC000%d) sent to SpiraTest with status %d.\n", $testName, $testCaseId, $executionStatusId);
+      }
     /*
         if (!$test instanceof PHPUnit_Framework_Warning) {
             if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_PASSED) {

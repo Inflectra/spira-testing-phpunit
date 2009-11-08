@@ -16,8 +16,6 @@
  // from the ArrayTest class
   $suite = new PHPUnit_Framework_TestSuite('SimpleTest');
  
- //Create the list of mappings between the PHPUnit tests and the SpiraTest test cases
- 
  //Create a new SpiraTest listener instance and specify the connection info
  $spiraListener = new SpiraListener_Listener;
  //$spiraListener->baseUrl = 'http://localhost/SpiraTest';
