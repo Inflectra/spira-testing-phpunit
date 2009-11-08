@@ -8,6 +8,7 @@
  */
  
  require_once 'PHPUnit/Framework.php';
+ require_once 'ImportExport.php';
  
  class SpiraListener_Listener implements PHPUnit_Framework_TestListener
  {
@@ -22,6 +23,21 @@
   const EXECUTION_STATUS_ID_BLOCKED = 5;
   
   /* Class properties */
+  
+  /*
+    The name of the test runner to report back to SpiraTest.
+    If you are running a Selenium-RC web test, you might want to 
+    set it to Selenium to distinguish from a true PHPUnit test
+  */
+  protected $testRunnerName = SpiraListener_Listener::DEFAULT_TEST_RUNNER_NAME;
+  public function getTestRunnerName ()
+  {
+    return $this->testRunnerName;
+  }
+  public function setTestRunnerName ($value)
+  {
+    $this->testRunnerName = $value;
+  }
   
   /*
     The base url of the Spira web service
@@ -202,6 +218,11 @@
         
         //Now convert the execution status into the values expected by SpiraTest
         $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_NOT_RUN;
+        $assertCount = 0;
+        $message = "test1";
+        $stackTrace = "test2";
+        $startDate = $time;
+        $endDate = $time;
         
         //If the test was in the warning situation, report as Blocked
         if ($test instanceof PHPUnit_Framework_Warning)
@@ -228,7 +249,18 @@
            }
         }        
         
-        printf ("\nTest Case '%s' (TC000%d) sent to SpiraTest with status %d.\n", $testName, $testCaseId, $executionStatusId);
+        //Send the results to SpiraTest
+        $importExport = new SpiraListener_ImportExport();
+        $importExport->setBaseUrl($this->baseUrl);
+        $importExport->setUserName($this->userName);
+        $importExport->setPassword($this->password);
+        $importExport->setProjectId($this->projectId);
+        $testRunId = $importExport->recordAutomated(
+            $testCaseId, $this->releaseId, $this->testSetId, $startDate, $endDate, $executionStatusId,
+            $this->testRunnerName, $testName, $assertCount, $message, $stackTrace);
+            
+        //Display the message letting the user know that the results were sent
+        printf ("\nTest Case '%s' (TC000%d) sent to SpiraTest with status %d - Test Run (TR000%d).\n", $testName, $testCaseId, $executionStatusId, $testRunId);
       }
     /*
         if (!$test instanceof PHPUnit_Framework_Warning) {
