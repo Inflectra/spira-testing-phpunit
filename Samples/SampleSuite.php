@@ -18,12 +18,12 @@
  
  //Create a new SpiraTest listener instance and specify the connection info
  $spiraListener = new SpiraListener_Listener;
- //$spiraListener->baseUrl = 'http://localhost/SpiraTest';
- //$spiraListener->userName = 'fredbloggs';
- //$spiraListener->password = 'fredbloggs';
- //$spiraListener->projectId = 1;
- //$spiraListener->releaseId = 1;
- //$spiraListener->testSetId = 1;
+ $spiraListener->setBaseUrl ('http://localhost/SpiraTest');
+ $spiraListener->setUserName ('fredbloggs');
+ $spiraListener->setPassword ('fredbloggs');
+ $spiraListener->setProjectId (1);
+ $spiraListener->setReleaseId (1);
+ $spiraListener->setTestSetId (1);
  
  // Create a test result and attach the SpiraTest listener
  // object as an observer to it (as well as the default console text listener)

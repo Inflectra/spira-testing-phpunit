@@ -21,6 +21,86 @@
   const EXECUTION_STATUS_ID_CAUTION = 6;
   const EXECUTION_STATUS_ID_BLOCKED = 5;
   
+  /* Class properties */
+  
+  /*
+    The base url of the Spira web service
+  */
+  protected $baseUrl;
+  public function getBaseUrl ()
+  {
+    return $this->baseUrl;
+  }
+  public function setBaseUrl ($value)
+  {
+    $this->baseUrl = $value;
+  }
+
+  /*
+    The user name of the Spira account accessing the web service
+  */
+  protected $userName;
+  public function getUserName ()
+  {
+    return $this->userName;
+  }
+  public function setUserName ($value)
+  {
+    $this->userName = $value;
+  }
+
+  /*
+    The password of the Spira account accessing the web service
+  */
+  protected $password;
+  public function getPassword ()
+  {
+    return $this->password;
+  }
+  public function setPassword ($value)
+  {
+    $this->password = $value;
+  }
+  
+  /*
+    The ID of the project we're returning results against
+  */
+  protected $projectId;
+  public function getProjectId ()
+  {
+    return $this->projectId;
+  }
+  public function setProjectId ($value)
+  {
+    $this->projectId = $value;
+  }
+  
+    /*
+    The ID of the release we're returning results against (optional)
+  */
+  protected $releaseId = -1;
+  public function getReleaseId ()
+  {
+    return $this->releaseId;
+  }
+  public function setReleaseId ($value)
+  {
+    $this->releaseId = $value;
+  }
+  
+    /*
+    The ID of the test set we're returning results against (optional)
+  */
+  protected $testSetId = -1;
+  public function getTestSetId ()
+  {
+    return $this->testSetId;
+  }
+  public function setTestSetId ($value)
+  {
+    $this->testSetId = $value;
+  }
+
     /**
      * An error occurred.
      *
