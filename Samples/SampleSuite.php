@@ -37,6 +37,6 @@
  
  // Run the tests and print the results
  $result = $suite->run($result);
- //$textPrinter->printResult($result);
+ $textPrinter->printResult($result);
 
  ?>

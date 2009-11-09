@@ -15,6 +15,9 @@
   //General constants
   const DEFAULT_TEST_RUNNER_NAME = "PHPUnit";
   
+  //Internal variables
+  protected $startTime;
+  
   //SpiraTest execution status constants
   const EXECUTION_STATUS_ID_PASSED = 2;
   const EXECUTION_STATUS_ID_FAILED = 1;
@@ -196,7 +199,8 @@
      */
     public function startTest(PHPUnit_Framework_Test $test)
     {
-      //Do nothing
+      //Record the time it started
+      $this->startTime = time();
     }
 
     /**
@@ -218,11 +222,11 @@
         
         //Now convert the execution status into the values expected by SpiraTest
         $executionStatusId = SpiraListener_Listener::EXECUTION_STATUS_ID_NOT_RUN;
-        $assertCount = 0;
-        $message = "test1";
-        $stackTrace = "test2";
-        $startDate = $time;
-        $endDate = $time;
+        $assertCount = $test->getNumAssertions();
+        $message = $test->getStatusMessage();
+        $stackTrace = $test->getStatusMessage();
+        $startDate =  $this->startTime;
+        $endDate = $this->startTime + $time;
         
         //If the test was in the warning situation, report as Blocked
         if ($test instanceof PHPUnit_Framework_Warning)
@@ -262,57 +266,6 @@
         //Display the message letting the user know that the results were sent
         printf ("\nTest Case '%s' (TC000%d) sent to SpiraTest with status %d - Test Run (TR000%d).\n", $testName, $testCaseId, $executionStatusId, $testRunId);
       }
-    /*
-        if (!$test instanceof PHPUnit_Framework_Warning) {
-            if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_PASSED) {
-                $ifStatus   = array('assigned', 'new', 'reopened');
-                $newStatus  = 'closed';
-                $message    = 'Automatically closed by PHPUnit (test passed).';
-                $resolution = 'fixed';
-                $cumulative = TRUE;
-            }
-
-            else if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_FAILURE) {
-                $ifStatus   = array('closed');
-                $newStatus  = 'reopened';
-                $message    = 'Automatically reopened by PHPUnit (test failed).';
-                $resolution = '';
-                $cumulative = FALSE;
-            }
-
-            else {
-                return;
-            }
-
-            $name    = $test->getName();
-            $tickets = PHPUnit_Util_Test::getTickets(get_class($test), $name);
-
-            foreach ($tickets as $ticket) {
-                // Remove this test from the totals (if it passed).
-                if ($test->getStatus() == PHPUnit_Runner_BaseTestRunner::STATUS_PASSED) {
-                    unset($this->ticketCounts[$ticket][$name]);
-                }
-
-                // Only close tickets if ALL referenced cases pass
-                // but reopen tickets if a single test fails.
-                if ($cumulative) {
-                    // Determine number of to-pass tests:
-                    if (count($this->ticketCounts[$ticket]) > 0) {
-                        // There exist remaining test cases with this reference.
-                        $adjustTicket = FALSE;
-                    } else {
-                        // No remaining tickets, go ahead and adjust.
-                        $adjustTicket = TRUE;
-                    }
-                } else {
-                    $adjustTicket = TRUE;
-                }
-
-                if ($adjustTicket && in_array($ticketInfo[3]['status'], $ifStatus)) {
-                    $this->updateTicket($ticket, $newStatus, $message, $resolution);
-                }
-            }
-        }*/
     }
  }
  ?>
