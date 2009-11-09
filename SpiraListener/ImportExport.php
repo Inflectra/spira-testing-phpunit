@@ -78,16 +78,16 @@
     $clientOptions = array(
       "location" => $url,
       "uri" => $namespace,
-      "trace" => 1,
+      "trace" => 0,
       "exceptions" => 0,
       "use" => SOAP_LITERAL,
       "style" => SOAP_RPC
       );
     $soapClient = new SoapClient(null, $clientOptions);
-    
+      
     //Now call the test run method
     $options = array(
-      "soapaction" => "TestRun_RecordAutomated2"
+      "soapaction" => $namespace . "TestRun_RecordAutomated2",
       );
    
     //For PHP soap calls to work correctly against .NET, need to prefix with namespace alias (ns1)
@@ -101,8 +101,8 @@
       new SoapParam ($testCaseId, $nsPrefix . "testCaseId"),
       new SoapParam ($releaseId, $nsPrefix . "releaseId"),
       new SoapParam ($testSetId, $nsPrefix . "testSetId"),
-      new SoapParam (date(DateTime::ISO8601, $startDate), $nsPrefix . "startDate"),
-      new SoapParam (date(DateTime::ISO8601, $endDate), $nsPrefix . "endDate"),
+      new SoapParam (date(DateTime::W3C, $startDate), $nsPrefix . "startDate"),
+      new SoapParam (date(DateTime::W3C, $endDate), $nsPrefix . "endDate"),
       new SoapParam ($executionStatusId, $nsPrefix . "executionStatusId"),
       new SoapParam ($testRunnerName, $nsPrefix . "runnerName"),
       new SoapParam ($testName, $nsPrefix . "runnerTestName"),
@@ -114,12 +114,14 @@
     $testRunId = $soapClient->__soapCall("TestRun_RecordAutomated2", $params, $options);
     
     //Used for debugging only - requires trace=true set during soap-client instantiation
+   /* 
     $fp = fopen('SoapRequest.xml', 'w');
+    //fprintf($fp, "%s\n", $soapClient->__getLastRequestHeaders());
     fprintf($fp, "%s\n", $soapClient->__getLastRequest());
     fclose($fp);
     $fp = fopen('SoapResponse.xml', 'w');
     fprintf($fp, "%s\n", $soapClient->__getLastResponse());
-    fclose($fp);
+    fclose($fp);*/
         
     return $testRunId;
   }

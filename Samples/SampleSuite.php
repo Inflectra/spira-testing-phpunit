@@ -16,6 +16,9 @@
  // from the ArrayTest class
   $suite = new PHPUnit_Framework_TestSuite('SimpleTest');
  
+ //Set the timezone identifier to match that used by the SpiraTest server
+ date_default_timezone_set ("US/Eastern");
+ 
  //Create a new SpiraTest listener instance and specify the connection info
  $spiraListener = new SpiraListener_Listener;
  $spiraListener->setBaseUrl ('http://localhost/SpiraTeam');
