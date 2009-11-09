@@ -18,7 +18,7 @@
  
  //Create a new SpiraTest listener instance and specify the connection info
  $spiraListener = new SpiraListener_Listener;
- $spiraListener->setBaseUrl ('http://localhost/SpiraTest');
+ $spiraListener->setBaseUrl ('http://localhost/SpiraTeam');
  $spiraListener->setUserName ('fredbloggs');
  $spiraListener->setPassword ('fredbloggs');
  $spiraListener->setProjectId (1);
