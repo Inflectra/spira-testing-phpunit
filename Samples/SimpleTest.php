@@ -5,18 +5,10 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * Some simple tests using the ability to return results back to SpiraTest
  * 
  * @author		Inflectra Corporation
- * @version		2.2.0
+ * @version		2.3.0
  *
  */
  
-/*@SpiraTestConfiguration(
-	url="http://sandman/SpiraTest",
-	login="fredbloggs",
-	password="fredbloggs",
-	projectId=1,
-	releaseId=1,
-	testSetId=1
-)*/
 class SimpleTest extends PHPUnit_Framework_TestCase
 {
 	protected $fValue1;
@@ -34,8 +26,6 @@ class SimpleTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Tests the addition of the two values
 	 */
-	/*@Test
-	@SpiraTestCase(testCaseId=5)*/
 	public function testAdd__2()
 	{
 		$result = $this->fValue1 + $this->fValue2;
@@ -47,9 +37,6 @@ class SimpleTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Tests division by zero
 	 */
-   /*
-	@Test
-	@SpiraTestCase(testCaseId=5)*/
 	public function testDivideByZero__3()
 	{
 		$zero = 0;
@@ -60,9 +47,6 @@ class SimpleTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Tests two equal values
 	 */
-   /*
-	@Test
-	@SpiraTestCase(testCaseId=6)*/
 	public function testEquals__4()
 	{
 		$this->assertEquals(12, 12);
@@ -78,9 +62,6 @@ class SimpleTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Tests success
 	 */
-   /*
-	@Test
-	@SpiraTestCase(testCaseId=6)*/
 	public function testSuccess__5()
 	{
 		//Successful test
