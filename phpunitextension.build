@@ -14,7 +14,7 @@
 		<echo message="Zipping up entire application" />
 		<zip zipfile="PHPUnitExtension.zip" verbose="true" comment="PHPUnit Extension for SpiraTest">
 			<fileset>
-				<include name="*.php" />
+				<include name="**/*.php" />
 				<include name="*.txt" />
 			</fileset>
 		</zip>
