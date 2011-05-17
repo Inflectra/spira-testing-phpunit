@@ -7,4 +7,4 @@ can be found at http://www.inflectra.com/SpiraTest/Documentation.aspx
 The PDF guide contains details instructions for integrating SpiraTest
 with a variety of automated testing tools including PHPUnit.
 
-(C) Copyright 2006-2009 Inflectra Corporation
+(C) Copyright 2006-2011 Inflectra Corporation
