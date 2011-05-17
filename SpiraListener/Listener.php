@@ -214,7 +214,7 @@
       //Get the full test name (includes the spira id appended)
       $testNameAndId = $test->getName();
       $testComponents = split("__", $testNameAndId);
-      if (count($testComponents >= 2))
+      if (count($testComponents) >= 2)
       {
         //extract the test case id from the name (separated by two underscores)
         $testName = $testComponents[0];
