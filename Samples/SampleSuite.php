@@ -3,7 +3,7 @@
  * Passes a list of tests to be executed to PHPUnit and adds the custom SpiraTest Listener
  * 
  * @author		Inflectra Corporation
- * @version		2.3.0
+ * @version		2.3.1
  *
  */
  
@@ -20,13 +20,8 @@
  date_default_timezone_set ("US/Eastern");
  
  //Create a new SpiraTest listener instance and specify the connection info
- $spiraListener = new SpiraListener_Listener;
+ $spiraListener = new SpiraListener_Listener('http://localhost/SpiraTeam', 'fredbloggs', 'fredbloggs', 1, 1, 1);
  $spiraListener->setBaseUrl ('http://localhost/SpiraTeam');
- $spiraListener->setUserName ('fredbloggs');
- $spiraListener->setPassword ('fredbloggs');
- $spiraListener->setProjectId (1);
- $spiraListener->setReleaseId (1);
- $spiraListener->setTestSetId (1);
  
  // Create a test result and attach the SpiraTest listener
  // object as an observer to it (as well as the default console text listener)

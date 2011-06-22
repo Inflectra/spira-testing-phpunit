@@ -3,7 +3,7 @@
  * Listens during PHPUnit test executions and reports the results back to SpiraTest/Team
  * 
  * @author		Inflectra Corporation
- * @version		2.3.0
+ * @version		2.3.1
  *
  */
  
@@ -24,6 +24,19 @@
   const EXECUTION_STATUS_ID_NOT_RUN = 3;
   const EXECUTION_STATUS_ID_CAUTION = 6;
   const EXECUTION_STATUS_ID_BLOCKED = 5;
+
+  /* Constructor */
+
+  public function __construct($spira_url = "", $spira_user = "", $spira_pass = "", $project_id = -1, $release_id = -1, $test_set_id = -1)
+  {
+
+        $this->setBaseUrl($spira_url);
+        $this->setUserName($spira_user);
+        $this->setPassword($spira_pass);
+        $this->setProjectId($project_id);
+        $this->setReleaseId($release_id);
+        $this->setTestSetId($test_set_id);
+  }
   
   /* Class properties */
   
