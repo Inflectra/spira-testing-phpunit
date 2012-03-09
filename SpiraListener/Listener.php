@@ -3,7 +3,7 @@
  * Listens during PHPUnit test executions and reports the results back to SpiraTest/Team
  * 
  * @author		Inflectra Corporation
- * @version		2.3.1
+ * @version		3.2.0
  *
  */
  
@@ -27,7 +27,7 @@
 
   /* Constructor */
 
-  public function __construct($spira_url = "", $spira_user = "", $spira_pass = "", $project_id = -1, $release_id = -1, $test_set_id = -1)
+  public function __construct($spira_url = "", $spira_user = "", $spira_pass = "", $project_id, $release_id = -1, $test_set_id = -1)
   {
 
         $this->setBaseUrl($spira_url);

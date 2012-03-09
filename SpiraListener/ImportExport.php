@@ -3,7 +3,7 @@
  * Provides a facade for recording automated results against SpiraTest
  * 
  * @author		Inflectra Corporation
- * @version		2.3.0
+ * @version		3.2.0
  *
  */
  
@@ -99,8 +99,6 @@
       new SoapParam ($this->projectId, $nsPrefix . "projectId"),
       new SoapParam (-1, $nsPrefix . "testerUserId"),
       new SoapParam ($testCaseId, $nsPrefix . "testCaseId"),
-      new SoapParam ($releaseId, $nsPrefix . "releaseId"),
-      new SoapParam ($testSetId, $nsPrefix . "testSetId"),
       new SoapParam (date(DateTime::W3C, $startDate), $nsPrefix . "startDate"),
       new SoapParam (date(DateTime::W3C, $endDate), $nsPrefix . "endDate"),
       new SoapParam ($executionStatusId, $nsPrefix . "executionStatusId"),
@@ -110,6 +108,16 @@
       new SoapParam ($message, $nsPrefix . "runnerMessage"),
       new SoapParam ($stackTrace, $nsPrefix . "runnerStackTrace")
       );
+
+    //testSetId and releaseId are nullable so need to convert -1 values to NULLs
+    if ($releaseId > 0)
+    {
+      $params[] = new SoapParam ($releaseId, $nsPrefix . "releaseId");
+    }
+    if ($testSetId > 0)
+    {
+      $params[] = new SoapParam ($testSetId, $nsPrefix . "testSetId");
+    }
       
     $testRunId = $soapClient->__soapCall("TestRun_RecordAutomated2", $params, $options);
     
